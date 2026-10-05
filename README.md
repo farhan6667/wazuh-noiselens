@@ -1,24 +1,27 @@
 # Wazuh NoiseLens
 
-**Measure what a proposed alert suppression would hide before deploying it.**
+See which alerts a proposed Wazuh exception would hide.
 
-Offline, deterministic analysis of Wazuh `alerts.json` exports: identify alert concentration,
-measure candidate exceptions, and flag policies that would suppress protected detections.
-Python 3.10+, zero runtime dependencies. No SIEM credentials or cloud service required.
+NoiseLens reads an exported `alerts.json` file on your workstation. It counts
+alerts by rule and measures how a proposed exception would affect that dataset.
+If the exception matches a protected alert, the command exits with a review failure.
 
-Status: **0.1.0 prototype**. Unit and CLI tests pass locally with synthetic data. Validation
-against a representative real-world, sanitized alert corpus is still needed.
+Requires Python 3.10 or newer, with no runtime dependencies. Analysis runs offline.
 
-## Why this exists
+Version 0.1.0 is a prototype. Local unit and CLI tests pass with synthetic data.
+Testing with representative, sanitized operator data is still pending.
 
-An alert rule generates most of your volume. Suppressing the entire rule may also hide the
-few events you need to investigate. NoiseLens measures a proposed rule-scoped exception
-against an export, including high-severity and explicitly protected matches.
+## Before suppressing a noisy rule
 
-High volume does not prove an alert is a false positive. NoiseLens measures impact; it does
-not classify incidents or modify a Wazuh manager.
+A busy rule may contain both routine activity and events worth investigating.
+NoiseLens lets you test a narrower exception against an export and inspect what
+it matches, including alerts with high severity or rule IDs you've protected.
 
-## One-minute demo
+Volume alone doesn't tell you whether an alert is a false positive. You still
+need to review the matching events and test an approved exception on a manager.
+NoiseLens measures the proposed impact and leaves that decision with you.
+
+## Run the demo
 
 ```sh
 python -m noiselens examples/alerts.jsonl --json audit.json --html audit.html
@@ -61,13 +64,17 @@ export its `_source` documents one per line first.
 }
 ```
 
-- Every suppression explicitly scopes one or more rule IDs.
-- Within a suppression, the rule constraint and all `equals` predicates must match.
-- Suppressions are ORed; overlapping matches count once in the overall impact.
-- Predicates are exact, case-sensitive, type-sensitive comparisons on dotted nested paths.
-- Null predicates, regex, wildcard and fuzzy matching are intentionally unsupported.
-- High-severity (`>= protected_level`) or named protected rules trigger a review failure.
-- Missing fields do not match. Fields with literal dots in their names are not supported.
+Each suppression must name one or more rule IDs. An alert matches only when
+its rule ID and every `equals` predicate match. Multiple suppressions are combined
+with OR, and overlapping matches count once in the overall total.
+
+Comparisons use exact values, including letter case and value type. Predicates
+use dotted paths to reach nested fields. Missing fields don't match, and literal
+dots in field names aren't supported. Null predicates, regex, wildcards and fuzzy
+matching aren't supported either.
+
+An alert at or above `protected_level`, or with a named protected rule ID, triggers
+a review failure if it matches a suppression.
 
 The policy is an analysis contract, not deployable Wazuh XML. Translate any approved exception
 manually and verify its behavior with the real engine before deployment.
@@ -87,11 +94,11 @@ writing a new partial report. Input/output path collisions are refused.
 
 A guard pass only means no protected alerts in this dataset matched. It does not establish
 that an exception is safe on unseen traffic. Pick a representative time window and include
-known incidents and benign operations. Severity is an operator-selected safeguard, not ground
-truth for maliciousness. No alert-free logs are included, so missed detections cannot be measured.
+known incidents and benign operations. Severity is an safeguard selected by the operator, not ground
+truth for maliciousness. No logs that produced no alerts are included, so missed detections cannot be measured.
 
-Duplicate records are counted separately; use non-overlapping exports or deduplicate upstream.
-No timestamp-based filtering or trend inference is performed. The tool streams records, but
+Duplicate records are counted separately; use exports without overlapping records or deduplicate upstream.
+No filtering by timestamp or trend inference is performed. The tool streams records, but
 rule counters and distinct rule/agent combinations grow in memory with data cardinality.
 No data is sent over the network; SQLite stores aggregation keys in memory.
 
@@ -102,8 +109,10 @@ python -m unittest discover -s tests -v
 ```
 
 Other projects such as [solsoc](https://github.com/luis-troccoli/solsoc) and
-[local_siem_agent](https://github.com/u9u-p/local_siem_agent) tackle AI-assisted triage.
-NoiseLens focuses on reproducible proposed-suppression impact, with no model or API dependency.
-The two approaches can coexist. See CONTRIBUTING.md and SECURITY.md before submitting samples.
+[local_siem_agent](https://github.com/u9u-p/local_siem_agent) tackle triage with language models.
+NoiseLens focuses on reproducible impact of proposed suppressions, with no model or API dependency.
+The two approaches can coexist. Read [contribution notes](CONTRIBUTING.md) and [security notes](SECURITY.md) before submitting samples.
 
 Built by [Syed Farhan Ahmed](https://farhan6667.github.io/portfolio/).
+
+For the demo commands and expected results, see [the demo guide](docs/demo.md).
