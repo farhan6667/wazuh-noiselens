@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "protected_level": 12,
+  "protect_rule_ids": [
+    "100900"
+  ],
+  "suppressions": [
+    {
+      "name": "reviewed-process-only",
+      "rule_ids": [
+        "60107"
+      ],
+      "equals": {
+        "data.win.eventdata.processName": "C:\\Tools\\approved.exe"
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "protected_level": 12,
+  "protect_rule_ids": [
+    "100900"
+  ],
+  "suppressions": [
+    {
+      "name": "overbroad-rule-only",
+      "rule_ids": [
+        "60107"
+      ]
+    }
+  ]
+}
