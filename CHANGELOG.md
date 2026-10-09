@@ -1,5 +1,12 @@
 # Changelog
 
+## Unreleased
+
+- Reports now state the time range the file covers, read from the alert `timestamp` with any offset and shown in UTC, and how many alerts had no readable timestamp.
+- New rule groups table (JSON, HTML and Markdown) so you can see, for example, file integrity versus authentication share of the volume.
+- `--path-depth N` with `--breakdown` folds file paths into their first N folders and prints a running share, so a long tail of paths shows up as a few directories.
+- New `docs/tuning-lessons.md` with the pitfalls behind these checks. The demo alerts carry rule groups and timestamps.
+
 ## 0.2.0: 2026-10-09
 
 - HTML reports are now readable pages (summary cards, a verdict banner, per-suppression and per-rule bars) instead of a JSON dump. Still one offline file with no scripts and a strict Content Security Policy.

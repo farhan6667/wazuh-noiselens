@@ -1,100 +1,100 @@
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 12}, "agent": {"id": "003"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 12}, "agent": {"id": "003"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 12}, "agent": {"id": "003"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 12}, "agent": {"id": "003"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 12}, "agent": {"id": "003"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
-{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "002"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "000"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 4, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "001"}, "data": {"win": {"eventdata": {"processName": "C:\\Tools\\approved.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 12, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "003"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 12, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "003"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 12, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "003"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 12, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "003"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "60107", "level": 12, "groups": ["windows", "demo_noisy"]}, "agent": {"id": "003"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14, "groups": ["windows", "demo_protected"]}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14, "groups": ["windows", "demo_protected"]}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14, "groups": ["windows", "demo_protected"]}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14, "groups": ["windows", "demo_protected"]}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14, "groups": ["windows", "demo_protected"]}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14, "groups": ["windows", "demo_protected"]}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14, "groups": ["windows", "demo_protected"]}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14, "groups": ["windows", "demo_protected"]}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14, "groups": ["windows", "demo_protected"]}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14, "groups": ["windows", "demo_protected"]}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14, "groups": ["windows", "demo_protected"]}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14, "groups": ["windows", "demo_protected"]}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14, "groups": ["windows", "demo_protected"]}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14, "groups": ["windows", "demo_protected"]}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}
+{"timestamp": "2026-10-05T09:00:00Z", "rule": {"id": "100900", "level": 14, "groups": ["windows", "demo_protected"]}, "agent": {"id": "004"}, "data": {"win": {"eventdata": {"processName": "C:\\Unknown\\unreviewed.exe"}}}}

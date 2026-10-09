@@ -29,6 +29,7 @@ Testing with representative, sanitized operator data is still pending.
 | **Analyzes** | An exported Wazuh alerts.json file, offline, on your workstation |
 | **Measures** | Matches per rule, share of volume, distinct agents, remaining alerts, with a readable offline HTML report and a Markdown summary |
 | **Guards** | Exits 1 when a proposed exception would hide a protected alert |
+| **Shows the shape** | Which rule groups make up your volume (file integrity vs authentication), and the UTC time range the file actually covers |
 | **Helps you write** | `--breakdown` lists the most common values of a field for one rule, so you can build a narrow exception from your own data |
 | **Runs on** | Python 3.10+, no runtime dependencies, no network use |
 | **Status** | Prototype. Testing with real, sanitized operator data is still pending |
@@ -88,6 +89,26 @@ These values are shown on this terminal only. They are never written to a report
 Eighty alerts come from one reviewed program and five from one nobody reviewed. An exception on `rule 60107` alone hides both. An exception that also requires `processName` to equal the reviewed path hides only the first. Put that in a policy and run NoiseLens again to confirm the protected count stays at zero.
 
 The breakdown prints field values, which can be sensitive, so they stay on your terminal and out of the reports. Control characters in a value are replaced before they are printed, and long values are cut.
+
+## See where the volume comes from
+
+Every report now says which time range the file covers (read from the alert `timestamp` with any offset and shown in UTC) and which rule groups make up the volume. Both catch common mistakes: analysing a file that only holds the hours since a manager restart, and suppressing "noise" without noticing it is a third of your file integrity alerts or most of your authentication events.
+
+For paths, fold a long tail into a few directories:
+
+```sh
+noiselens alerts.jsonl --json out.json --breakdown 100500:syscheck.path --path-depth 3
+```
+
+```text
+Top values of syscheck.path for rule 100500: 4210 alerts, 38 distinct values, 0 without that field
+    2990   71.0%  /home/builder/.cache
+     870   91.7%  /var/lib/tooling
+     350  100.0%  /opt/vendor/agent
+(the middle column is the running share of the alerts that carry this field)
+```
+
+The values above are invented. Often three or four directories carry most of the noise, and that is where a narrow exception belongs. Read [docs/tuning-lessons.md](docs/tuning-lessons.md) for the pitfalls behind these checks: IDs that mean different things on different hosts, tuning pinned to an address, and your own tools tripping your own rules.
 
 ## Check a policy in your editor
 
@@ -207,6 +228,12 @@ No. Volume alone does not make an alert noise. NoiseLens measures the impact of 
 
 ### How do I find a narrow exception instead of silencing the whole rule?
 Run `noiselens alerts.jsonl --json out.json --breakdown RULE_ID:field.path`. It prints the most common values of that field for that rule, for example which process names produce the noise. Build the exception on the reviewed value, put it in a policy and run NoiseLens again to check that no protected alert matches.
+
+### How do I know which time range my export covers?
+The report states it: the first and last alert timestamp in UTC, and how many alerts had no readable timestamp. The live `alerts.json` rotates when the manager restarts, so a file read right after a restart can hold only a few hours.
+
+### How do I see which kinds of alerts make up most of my volume?
+The report has a rule groups table with the share of alerts per group, for example file integrity versus authentication. An alert can belong to several groups, so the shares can add up to more than 100%.
 
 ### What input does it read?
 JSON Lines: one alert per line, or one indexer document with a `_source` object per line. A whole search-response wrapper is not accepted, so export the `_source` documents one per line first.

@@ -52,6 +52,11 @@ def html_report(report):
             f"<div class='card'><b>{impact['remaining']}</b><span>remaining</span></div>"
             f"<div class='card'><b class='{'ok' if impact['protected_would_suppress'] == 0 else 'bad'}'>{impact['protected_would_suppress']}</b><span>of {impact['protected_alerts']} protected hit</span></div>")
     body.append("</div>")
+    cov = report.get("coverage") or {}
+    if cov.get("first_utc"):
+        missing = cov.get("alerts_without_valid_timestamp", 0)
+        body.append(f"<p class='sub'>Alerts in this file run from <code>{E(cov['first_utc'])}</code> to <code>{E(cov['last_utc'])}</code> (UTC)"
+                    + (f", and {missing} had no readable timestamp" if missing else "") + ".</p>")
     if impact:
         if impact["guard_passed"]:
             body.append("<div class='verdict pass'>No protected alert matched in this dataset. That is not proof the exception is safe on traffic you have not seen.</div>")
@@ -68,6 +73,12 @@ def html_report(report):
         body.append(f"<tr><td><code>{E(str(r['rule_id']))}</code></td><td>{r['alerts']}</td>"
                     f"<td>{r['share_percent']}%<br>{_bar(r['alerts'], 0, total)}</td><td>{r['distinct_agents']}</td></tr>")
     body.append("</table>")
+    if report.get("top_groups"):
+        body.append("<h2>Rule groups</h2><p class='sub'>An alert can belong to several groups, so shares can add up to more than 100%.</p>"
+                    "<table><tr><th>Group</th><th>Alerts</th><th>Share</th></tr>")
+        for g in report["top_groups"]:
+            body.append(f"<tr><td><code>{E(str(g['group']))}</code></td><td>{g['alerts']}</td><td>{g['share_percent']}%<br>{_bar(g['alerts'], 0, total)}</td></tr>")
+        body.append("</table>")
     sev = report["severity_distribution"]
     if sev:
         body.append("<h2>Severity</h2><table><tr><th>Level</th><th>Alerts</th><th>Share</th></tr>")
@@ -94,8 +105,14 @@ def markdown_report(report):
         lines += [f"{head} · would hide **{impact['would_suppress']}**, leaves **{impact['remaining']}** · {verdict}", "",
                   "| Suppression | Matches | Protected matches |", "|---|---|---|"]
         lines += [f"| `{_md(s['name'])}` | {s['matches']} | {s['protected_matches']} |" for s in impact["per_suppression"]]
+    cov = report.get("coverage") or {}
+    if cov.get("first_utc"):
+        lines += ["", f"Alerts run from `{cov['first_utc']}` to `{cov['last_utc']}` (UTC)."]
     lines += ["", "| Rule | Alerts | Share | Distinct agents |", "|---|---|---|---|"]
     lines += [f"| `{_md(r['rule_id'])}` | {r['alerts']} | {r['share_percent']}% | {r['distinct_agents']} |" for r in report["top_rules"]]
+    if report.get("top_groups"):
+        lines += ["", "| Rule group | Alerts | Share |", "|---|---|---|"]
+        lines += [f"| `{_md(g['group'])}` | {g['alerts']} | {g['share_percent']}% |" for g in report["top_groups"]]
     lines += ["", f"_{_md(report['interpretation'])}_"]
     return "\n".join(lines) + "\n"
 

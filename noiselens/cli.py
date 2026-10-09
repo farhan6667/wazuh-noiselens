@@ -1,8 +1,10 @@
 import argparse
 from collections import Counter
+from datetime import datetime, timezone
 from contextlib import closing
 import json
 from pathlib import Path
+import re
 import sqlite3
 import sys
 from importlib import resources
@@ -65,12 +67,32 @@ def matches(event, policy):
                for key, value in policy.get("equals", {}).items())
 
 
+
+_TS = re.compile(r"^(\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d)(?:\.(\d+))?(Z|[+-]\d\d:?\d\d)$")
+
+
+def parse_timestamp(value):
+    """Wazuh alert timestamp to an aware UTC datetime, or None. Offsets such as +0000 and +05:00 are both read."""
+    if not isinstance(value, str):
+        return None
+    m = _TS.match(value.strip())
+    if not m:
+        return None
+    base, frac, off = m.groups()
+    off = "+00:00" if off == "Z" else (off if ":" in off else off[:3] + ":" + off[3:])
+    try:
+        return datetime.fromisoformat(f"{base}.{(frac or '0')[:6].ljust(6, '0')}{off}").astimezone(timezone.utc)
+    except ValueError:
+        return None
+
+
 MAX_DISTINCT_VALUES = 5000
 
 
 def analyze(path, policy=None, top=10, breakdown=None, collect=None):
     total, protected_total, removed, protected_removed = 0, 0, 0, 0
     levels, rules, per_policy, per_policy_protected = Counter(), Counter(), Counter(), Counter()
+    groups, first_ts, last_ts, no_ts = Counter(), None, None, 0
     policy_names = [p["name"] for p in policy["suppressions"]] if policy else []
     # Store only rule/agent combinations in memory, never full logs or descriptions.
     with closing(sqlite3.connect(":memory:")) as db:
@@ -108,6 +130,16 @@ def analyze(path, policy=None, top=10, breakdown=None, collect=None):
                         collect["missing"] = collect.get("missing", 0) + 1
                 levels[rule["level"]] += 1
                 rules[rule["id"]] += 1
+                rule_groups = rule.get("groups")
+                if isinstance(rule_groups, list):
+                    for group in set(g for g in rule_groups if isinstance(g, str)):
+                        groups[group] += 1
+                stamp = parse_timestamp(event.get("timestamp")) if isinstance(event, dict) else None
+                if stamp is None:
+                    no_ts += 1
+                else:
+                    first_ts = stamp if first_ts is None or stamp < first_ts else first_ts
+                    last_ts = stamp if last_ts is None or stamp > last_ts else last_ts
                 if agent_id is not None:
                     db.execute("INSERT OR IGNORE INTO agents VALUES (?,?)", (rule["id"], agent_id))
                 protected = bool(policy and (rule["level"] >= policy.get("protected_level", 12) or
@@ -130,6 +162,11 @@ def analyze(path, policy=None, top=10, breakdown=None, collect=None):
                   "share_percent": round(100 * count / total, 2),
                   "distinct_agents": agent_counts.get(rid, 0)}
                  for rid, count in rules.most_common(top)],
+              "top_groups": [{"group": g, "alerts": c, "share_percent": round(100 * c / total, 2)}
+                             for g, c in groups.most_common(top)],
+              "coverage": {"first_utc": first_ts.isoformat() if first_ts else None,
+                           "last_utc": last_ts.isoformat() if last_ts else None,
+                           "alerts_without_valid_timestamp": no_ts},
               "interpretation": "Volume does not establish false positives. Observed dataset only; duplicate input rows count separately."}
     if policy:
         report["impact"] = {"would_suppress": removed, "remaining": total - removed,
@@ -153,13 +190,30 @@ def parse_breakdown(text):
     return rule_id.strip(), path.strip()
 
 
-def print_breakdown(breakdown, collect, limit):
+def group_by_path(values, depth):
+    """Fold values like C:\\Tools\\a.exe or /var/log/x into their first `depth` folders, so a long tail shows as a few directories."""
+    folded = Counter()
+    for value, count in values.items():
+        parts = [p for p in re.split(r"[\\/]+", str(value)) if p]
+        lead = "/" if str(value).startswith("/") else ""
+        folded[lead + "/".join(parts[:depth]) if parts else str(value)] += count
+    return folded
+
+
+def print_breakdown(breakdown, collect, limit, depth=None):
     rule_id, path = breakdown
     values = collect.get("values", Counter())
+    if depth:
+        values = group_by_path(values, depth)
     print(f"Top values of {views.printable(path)} for rule {views.printable(rule_id)}: "
           f"{collect.get('alerts', 0)} alerts, {len(values)} distinct values, {collect.get('missing', 0)} without that field")
+    seen_total = sum(values.values())
+    running = 0
     for value, count in values.most_common(limit):
-        print(f"{count:>8}  {views.printable(value)}")
+        running += count
+        share = f"{100 * running / seen_total:5.1f}%" if seen_total else "    -"
+        print(f"{count:>8}  {share}  {views.printable(value)}")
+    print("(the middle column is the running share of the alerts that carry this field)")
     if collect.get("truncated"):
         print(f"(stopped counting new distinct values after {MAX_DISTINCT_VALUES})")
     print("These values are shown on this terminal only. They are never written to a report.")
@@ -175,6 +229,8 @@ def main(argv=None):
     parser.add_argument("--markdown", help="Markdown summary, for example for $GITHUB_STEP_SUMMARY")
     parser.add_argument("--breakdown", metavar="RULE_ID:FIELD",
                         help="Print the most common values of one field for one rule (terminal only), to help write a narrow exception")
+    parser.add_argument("--path-depth", type=int, metavar="N",
+                        help="With --breakdown, fold file paths into their first N folders so noise shows up as a few directories")
     parser.add_argument("--print-schema", action="store_true", help="Print the policy JSON Schema and exit")
     args = parser.parse_args(argv)
     try:
@@ -192,6 +248,8 @@ def main(argv=None):
         outputs = [Path(p).resolve() for p in (args.json_path, args.html, args.markdown) if p]
         if any(p in inputs for p in outputs) or len(outputs) != len(set(outputs)):
             raise InputError("Outputs must differ from inputs and each other")
+        if args.path_depth is not None and (args.path_depth < 1 or not args.breakdown):
+            raise InputError("--path-depth needs --breakdown and a number of 1 or more")
         breakdown = parse_breakdown(args.breakdown) if args.breakdown else None
         collect = {}
         report = analyze(source, load_policy(args.policy) if args.policy else None, args.top, breakdown, collect)
@@ -202,7 +260,7 @@ def main(argv=None):
             write_text(args.markdown, views.markdown_report(report))
         print(f"Analyzed {report['total_alerts']} alerts")
         if breakdown:
-            print_breakdown(breakdown, collect, args.top)
+            print_breakdown(breakdown, collect, args.top, args.path_depth)
         if report.get("impact", {}).get("guard_passed") is False:
             print("REVIEW REQUIRED: proposed policy would suppress protected alerts", file=sys.stderr)
             return 1
