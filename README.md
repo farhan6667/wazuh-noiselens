@@ -19,7 +19,7 @@ If the exception matches a protected alert, the command exits with a review fail
 
 Requires Python 3.10 or newer, with no runtime dependencies. Analysis runs offline.
 
-Version 0.1.0 is a prototype. Local unit and CLI tests pass with synthetic data.
+Version 0.2.0 is a prototype. Local unit and CLI tests pass with synthetic data.
 Testing with representative, sanitized operator data is still pending.
 
 ## At a glance
@@ -27,8 +27,9 @@ Testing with representative, sanitized operator data is still pending.
 | | |
 |---|---|
 | **Analyzes** | An exported Wazuh alerts.json file, offline, on your workstation |
-| **Measures** | Matches per rule, share of volume, distinct agents, remaining alerts |
+| **Measures** | Matches per rule, share of volume, distinct agents, remaining alerts, with a readable offline HTML report and a Markdown summary |
 | **Guards** | Exits 1 when a proposed exception would hide a protected alert |
+| **Helps you write** | `--breakdown` lists the most common values of a field for one rule, so you can build a narrow exception from your own data |
 | **Runs on** | Python 3.10+, no runtime dependencies, no network use |
 | **Status** | Prototype. Testing with real, sanitized operator data is still pending |
 
@@ -60,6 +61,51 @@ it produces a report and exits 1 (**review required**).
 This teaches the guard, not a production recommendation for rule 60107.
 
 Install with `python -m pip install .`, then use `noiselens` instead of `python -m noiselens`.
+
+## What a report looks like
+
+The HTML report is one offline file with no scripts and no remote assets. This is the broad demo policy: it hides 85 of 100 alerts, and 5 of them are protected.
+
+<p align="center"><img src="docs/img/report-broad.webp" width="860" alt="NoiseLens report for the broad demo policy: 100 alerts analyzed, 85 would be hidden, 5 of 20 protected alerts hit, with a REVIEW REQUIRED banner and bars per rule"></p>
+
+Add `--markdown summary.md` to get the same result as a table for `$GITHUB_STEP_SUMMARY` or a pull request comment.
+
+## Find a narrow exception from your own data
+
+A broad exception on a busy rule is how protected alerts get hidden. To build a narrow one, look at what the noisy rule actually contains:
+
+```sh
+noiselens examples/alerts.jsonl --json audit.json --breakdown 60107:data.win.eventdata.processName
+```
+
+```text
+Top values of data.win.eventdata.processName for rule 60107: 85 alerts, 2 distinct values, 0 without that field
+      80  C:\Tools\approved.exe
+       5  C:\Unknown\unreviewed.exe
+These values are shown on this terminal only. They are never written to a report.
+```
+
+Eighty alerts come from one reviewed program and five from one nobody reviewed. An exception on `rule 60107` alone hides both. An exception that also requires `processName` to equal the reviewed path hides only the first. Put that in a policy and run NoiseLens again to confirm the protected count stays at zero.
+
+The breakdown prints field values, which can be sensitive, so they stay on your terminal and out of the reports. Control characters in a value are replaced before they are printed, and long values are cut.
+
+## Check a policy in your editor
+
+The policy file has a JSON Schema, so VS Code and similar editors can flag a typo in a key as you type. Add `"$schema": "https://raw.githubusercontent.com/farhan6667/wazuh-noiselens/main/noiselens/policy.schema.json"` to the policy, or print the schema offline with `noiselens --print-schema`.
+
+## Use it with Wazuh RuleGuard
+
+The two tools cover both halves of tuning. NoiseLens answers "what would this exception hide in my alerts?". After you write the exception, [Wazuh RuleGuard](https://github.com/farhan6667/wazuh-ruleguard) answers "do the detections I care about still fire, and does the noisy one stay quiet?". Keep one sample of each kind in a RuleGuard suite and run both before you change the manager.
+
+## Run it in a container
+
+Each release publishes an image to GitHub Packages, so you can run NoiseLens without installing Python:
+
+```sh
+docker run --rm --user "$(id -u):$(id -g)" -v "$PWD:/work" ghcr.io/farhan6667/wazuh-noiselens   examples/alerts.jsonl --json audit.json
+```
+
+The image runs as a non-root user, needs no network, and contains only NoiseLens. Mount the folder with your exported alerts.
 
 ## Your data
 
@@ -148,6 +194,9 @@ Export your alerts as `alerts.json`, write the exception as a small JSON policy 
 
 ### Can it tell me which alerts are false positives?
 No. Volume alone does not make an alert noise. NoiseLens measures the impact of a proposed exception on your own data, and you still review the matching events before deciding.
+
+### How do I find a narrow exception instead of silencing the whole rule?
+Run `noiselens alerts.jsonl --json out.json --breakdown RULE_ID:field.path`. It prints the most common values of that field for that rule, for example which process names produce the noise. Build the exception on the reviewed value, put it in a policy and run NoiseLens again to check that no protected alert matches.
 
 ### What input does it read?
 JSON Lines: one alert per line, or one indexer document with a `_source` object per line. A whole search-response wrapper is not accepted, so export the `_source` documents one per line first.

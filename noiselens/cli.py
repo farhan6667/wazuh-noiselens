@@ -1,11 +1,13 @@
 import argparse
 from collections import Counter
 from contextlib import closing
-import html
 import json
 from pathlib import Path
 import sqlite3
 import sys
+from importlib import resources
+
+from . import report as views
 
 
 class InputError(Exception):
@@ -28,7 +30,7 @@ def load_policy(path):
         raise InputError("Cannot read policy JSON") from None
     if not isinstance(policy, dict) or policy.get("schema_version") != 1:
         raise InputError("Policy needs schema_version 1")
-    if set(policy) - {"schema_version", "protect_rule_ids", "protected_level", "suppressions"}:
+    if set(policy) - {"$schema", "schema_version", "protect_rule_ids", "protected_level", "suppressions"}:
         raise InputError("Unknown policy key")
     level = policy.get("protected_level", 12)
     if type(level) is not int or not 0 <= level <= 16:
@@ -63,7 +65,10 @@ def matches(event, policy):
                for key, value in policy.get("equals", {}).items())
 
 
-def analyze(path, policy=None, top=10):
+MAX_DISTINCT_VALUES = 5000
+
+
+def analyze(path, policy=None, top=10, breakdown=None, collect=None):
     total, protected_total, removed, protected_removed = 0, 0, 0, 0
     levels, rules, per_policy, per_policy_protected = Counter(), Counter(), Counter(), Counter()
     policy_names = [p["name"] for p in policy["suppressions"]] if policy else []
@@ -90,6 +95,17 @@ def analyze(path, policy=None, top=10):
                 if agent_id is not None and not isinstance(agent_id, str):
                     raise InputError(f"agent.id must be a string on line {number}")
                 total += 1
+                if breakdown and collect is not None and rule["id"] == breakdown[0]:
+                    collect["alerts"] = collect.get("alerts", 0) + 1
+                    value = field(event, breakdown[1])
+                    if type(value) in (str, int, bool):
+                        values = collect.setdefault("values", Counter())
+                        if value in values or len(values) < MAX_DISTINCT_VALUES:
+                            values[value] += 1
+                        else:
+                            collect["truncated"] = True
+                    else:
+                        collect["missing"] = collect.get("missing", 0) + 1
                 levels[rule["level"]] += 1
                 rules[rule["id"]] += 1
                 if agent_id is not None:
@@ -126,48 +142,67 @@ def analyze(path, policy=None, top=10):
     return report
 
 
-def write_html(report, path):
-    rows = "".join("<tr>" + "".join(f"<td>{html.escape(str(row[k]))}</td>" for k in
-                   ("rule_id", "alerts", "share_percent", "distinct_agents")) + "</tr>"
-                   for row in report["top_rules"])
-    impact = report.get("impact")
-    status = "No policy tested" if impact is None else ("REVIEW REQUIRED" if not impact["guard_passed"] else "No protected alerts matched in this dataset")
-    Path(path).write_text("<!doctype html><html lang='en'><meta charset='utf-8'>"
-        "<meta name='viewport' content='width=device-width,initial-scale=1'>"
-        "<meta http-equiv='Content-Security-Policy' content=\"default-src 'none'; style-src 'unsafe-inline'\">"
-        "<title>Wazuh NoiseLens</title><style>body{background:#101925;color:#e8edf4;font:16px system-ui;max-width:1000px;margin:40px auto;padding:20px}"
-        "h1{color:#71ddb2}table{border-collapse:collapse;width:100%}td,th{padding:12px;border-bottom:1px solid #344459;text-align:left}"
-        "pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#172538;padding:20px;border-radius:12px}</style>"
-        f"<h1>Wazuh NoiseLens</h1><p>{report['total_alerts']} observed alerts · {html.escape(status)}</p>"
-        "<p>Measure proposed suppression impact before changing your manager.</p>"
-        "<table><tr><th>Rule</th><th>Alerts</th><th>Share %</th><th>Distinct agents</th></tr>"
-        + rows + "</table><h2>Impact and limitations</h2><pre>"
-        + html.escape(json.dumps(impact or report["interpretation"], indent=2)) + "</pre></html>", encoding="utf-8")
+def write_text(path, text):
+    Path(path).write_text(text, encoding="utf-8")
+
+
+def parse_breakdown(text):
+    rule_id, sep, path = text.partition(":")
+    if not sep or not rule_id.strip() or not path.strip() or not all(part for part in path.split(".")):
+        raise InputError("--breakdown needs RULE_ID:dotted.field.path, for example 60107:data.win.eventdata.processName")
+    return rule_id.strip(), path.strip()
+
+
+def print_breakdown(breakdown, collect, limit):
+    rule_id, path = breakdown
+    values = collect.get("values", Counter())
+    print(f"Top values of {views.printable(path)} for rule {views.printable(rule_id)}: "
+          f"{collect.get('alerts', 0)} alerts, {len(values)} distinct values, {collect.get('missing', 0)} without that field")
+    for value, count in values.most_common(limit):
+        print(f"{count:>8}  {views.printable(value)}")
+    if collect.get("truncated"):
+        print(f"(stopped counting new distinct values after {MAX_DISTINCT_VALUES})")
+    print("These values are shown on this terminal only. They are never written to a report.")
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(description="Offline Wazuh suppression impact analysis; no auto-suppression")
-    parser.add_argument("alerts", help="Wazuh alerts.json JSONL, or one _source document per line")
+    parser.add_argument("alerts", nargs="?", help="Wazuh alerts.json JSONL, or one _source document per line")
     parser.add_argument("--policy")
     parser.add_argument("--top", type=int, default=10)
-    parser.add_argument("--json", required=True, dest="json_path")
+    parser.add_argument("--json", dest="json_path")
     parser.add_argument("--html")
+    parser.add_argument("--markdown", help="Markdown summary, for example for $GITHUB_STEP_SUMMARY")
+    parser.add_argument("--breakdown", metavar="RULE_ID:FIELD",
+                        help="Print the most common values of one field for one rule (terminal only), to help write a narrow exception")
+    parser.add_argument("--print-schema", action="store_true", help="Print the policy JSON Schema and exit")
     args = parser.parse_args(argv)
     try:
+        if args.print_schema:
+            print(resources.files("noiselens").joinpath("policy.schema.json").read_text(encoding="utf-8"), end="")
+            return 0
+        if not args.alerts or not args.json_path:
+            parser.error("the alerts file and --json are required")
         if args.top <= 0:
             raise InputError("--top must be positive")
         source = Path(args.alerts).resolve()
         inputs = {source}
         if args.policy:
             inputs.add(Path(args.policy).resolve())
-        outputs = [Path(p).resolve() for p in (args.json_path, args.html) if p]
+        outputs = [Path(p).resolve() for p in (args.json_path, args.html, args.markdown) if p]
         if any(p in inputs for p in outputs) or len(outputs) != len(set(outputs)):
             raise InputError("Outputs must differ from inputs and each other")
-        report = analyze(source, load_policy(args.policy) if args.policy else None, args.top)
+        breakdown = parse_breakdown(args.breakdown) if args.breakdown else None
+        collect = {}
+        report = analyze(source, load_policy(args.policy) if args.policy else None, args.top, breakdown, collect)
         Path(args.json_path).write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
         if args.html:
-            write_html(report, args.html)
+            write_text(args.html, views.html_report(report))
+        if args.markdown:
+            write_text(args.markdown, views.markdown_report(report))
         print(f"Analyzed {report['total_alerts']} alerts")
+        if breakdown:
+            print_breakdown(breakdown, collect, args.top)
         if report.get("impact", {}).get("guard_passed") is False:
             print("REVIEW REQUIRED: proposed policy would suppress protected alerts", file=sys.stderr)
             return 1

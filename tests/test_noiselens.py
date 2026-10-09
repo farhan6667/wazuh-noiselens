@@ -3,7 +3,8 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from noiselens.cli import InputError, analyze, load_policy, main, matches, write_html
+from noiselens import report as views
+from noiselens.cli import InputError, analyze, load_policy, main, matches
 
 
 def policy():
@@ -113,7 +114,7 @@ class Tests(unittest.TestCase):
         report = self.analyze([alert(rid="<script>alert(1)</script>")])
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "report.html"
-            write_html(report, path)
+            path.write_text(views.html_report(report), encoding="utf-8")
             self.assertNotIn("<script>", path.read_text())
 
 
