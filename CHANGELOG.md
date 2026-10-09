@@ -1,8 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- Removed the Urdu README that shipped in 0.3.0. The project documentation stays in plain English for an international audience.
+
 ## 0.3.0: 2026-10-09
 
-- Urdu README (`README.ur.md`).
 - `--burst-window MINUTES` adds a burst view: runs of alerts from one rule on one agent with gaps shorter than the window are counted as one incident, per rule and overall, in JSON, HTML and Markdown. Agents are counted, never named.
 - Reports now state the time range the file covers, read from the alert `timestamp` with any offset and shown in UTC, and how many alerts had no readable timestamp.
 - New rule groups table (JSON, HTML and Markdown) so you can see, for example, file integrity versus authentication share of the volume.
