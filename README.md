@@ -29,6 +29,7 @@ Testing with representative, sanitized operator data is still pending.
 | **Analyzes** | An exported Wazuh alerts.json file, offline, on your workstation |
 | **Measures** | Matches per rule, share of volume, distinct agents, remaining alerts, with a readable offline HTML report and a Markdown summary |
 | **Guards** | Exits 1 when a proposed exception would hide a protected alert |
+| **Counts incidents** | `--burst-window` shows how many separate incidents the alerts really are (one rule on one agent, close together), so you can see how repetitive the volume is |
 | **Shows the shape** | Which rule groups make up your volume (file integrity vs authentication), and the UTC time range the file actually covers |
 | **Helps you write** | `--breakdown` lists the most common values of a field for one rule, so you can build a narrow exception from your own data |
 | **Runs on** | Python 3.10+, no runtime dependencies, no network use |
@@ -109,6 +110,18 @@ Top values of syscheck.path for rule 100500: 4210 alerts, 38 distinct values, 0 
 ```
 
 The values above are invented. Often three or four directories carry most of the noise, and that is where a narrow exception belongs. Read [docs/tuning-lessons.md](docs/tuning-lessons.md) for the pitfalls behind these checks: IDs that mean different things on different hosts, tuning pinned to an address, and your own tools tripping your own rules.
+
+## How many incidents are these alerts really?
+
+A thousand "failed login" alerts from one machine in ten minutes are one story, not a thousand. `--burst-window` groups alerts from the same rule on the same agent when the gaps between them are shorter than the window:
+
+```sh
+noiselens alerts.jsonl --json out.json --burst-window 5
+```
+
+The report then shows, per rule, how many alerts and how many incidents there are, and the overall reduction. Agents are never named in the report, only counted. It uses the alert `timestamp`, and alerts without a readable one are skipped and counted.
+
+This is a measurement of repetition, not a verdict. Repeated low severity alerts can be harmless churn, and they can also be a brute force attempt, so NoiseLens never labels anything as noise for you. Rules of thumb such as "low level means noise" or "anything repeated is noise" are exactly how real detections get hidden. Use the burst view to find where to look, then check the events.
 
 ## Check a policy in your editor
 
@@ -234,6 +247,9 @@ The report states it: the first and last alert timestamp in UTC, and how many al
 
 ### How do I see which kinds of alerts make up most of my volume?
 The report has a rule groups table with the share of alerts per group, for example file integrity versus authentication. An alert can belong to several groups, so the shares can add up to more than 100%.
+
+### How can I tell if my alerts are really a few incidents repeated many times?
+Run with `--burst-window 5` (minutes). Alerts from one rule on one agent, with gaps shorter than the window, count as one incident. The report shows alerts versus incidents per rule and the overall reduction. It measures repetition only and does not say the alerts are harmless.
 
 ### What input does it read?
 JSON Lines: one alert per line, or one indexer document with a `_source` object per line. A whole search-response wrapper is not accepted, so export the `_source` documents one per line first.

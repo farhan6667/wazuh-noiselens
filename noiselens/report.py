@@ -73,6 +73,15 @@ def html_report(report):
         body.append(f"<tr><td><code>{E(str(r['rule_id']))}</code></td><td>{r['alerts']}</td>"
                     f"<td>{r['share_percent']}%<br>{_bar(r['alerts'], 0, total)}</td><td>{r['distinct_agents']}</td></tr>")
     body.append("</table>")
+    bursts = report.get("bursts")
+    if bursts:
+        body.append(f"<h2>How repetitive is it?</h2><p class='sub'>With a {bursts['window_minutes']:g} minute window, {bursts['alerts_with_timestamp']} alerts are "
+                    f"<b>{bursts['incidents']} incidents</b>, a {bursts['reduction_percent']}% reduction. An incident is a run of alerts from one rule on one agent "
+                    "with gaps shorter than the window. It shows how repetitive the volume is, not that any of it is harmless.</p>"
+                    "<table><tr><th>Rule</th><th>Alerts</th><th>Incidents</th></tr>")
+        for r in bursts["top_rules"]:
+            body.append(f"<tr><td><code>{E(str(r['rule_id']))}</code></td><td>{r['alerts']}</td><td>{r['incidents']}</td></tr>")
+        body.append("</table>")
     if report.get("top_groups"):
         body.append("<h2>Rule groups</h2><p class='sub'>An alert can belong to several groups, so shares can add up to more than 100%.</p>"
                     "<table><tr><th>Group</th><th>Alerts</th><th>Share</th></tr>")
@@ -110,6 +119,11 @@ def markdown_report(report):
         lines += ["", f"Alerts run from `{cov['first_utc']}` to `{cov['last_utc']}` (UTC)."]
     lines += ["", "| Rule | Alerts | Share | Distinct agents |", "|---|---|---|---|"]
     lines += [f"| `{_md(r['rule_id'])}` | {r['alerts']} | {r['share_percent']}% | {r['distinct_agents']} |" for r in report["top_rules"]]
+    bursts = report.get("bursts")
+    if bursts:
+        lines += ["", f"**Burst view ({bursts['window_minutes']:g} minute window):** {bursts['alerts_with_timestamp']} alerts are {bursts['incidents']} incidents, {bursts['reduction_percent']}% fewer.", "",
+                  "| Rule | Alerts | Incidents |", "|---|---|---|"]
+        lines += [f"| `{_md(r['rule_id'])}` | {r['alerts']} | {r['incidents']} |" for r in bursts["top_rules"]]
     if report.get("top_groups"):
         lines += ["", "| Rule group | Alerts | Share |", "|---|---|---|"]
         lines += [f"| `{_md(g['group'])}` | {g['alerts']} | {g['share_percent']}% |" for g in report["top_groups"]]

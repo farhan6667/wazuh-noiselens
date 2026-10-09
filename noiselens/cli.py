@@ -89,10 +89,12 @@ def parse_timestamp(value):
 MAX_DISTINCT_VALUES = 5000
 
 
-def analyze(path, policy=None, top=10, breakdown=None, collect=None):
+def analyze(path, policy=None, top=10, breakdown=None, collect=None, burst_minutes=None):
     total, protected_total, removed, protected_removed = 0, 0, 0, 0
     levels, rules, per_policy, per_policy_protected = Counter(), Counter(), Counter(), Counter()
     groups, first_ts, last_ts, no_ts = Counter(), None, None, 0
+    window = burst_minutes * 60 if burst_minutes else None
+    last_seen, incidents, burst_alerts, rule_incidents = {}, 0, 0, Counter()
     policy_names = [p["name"] for p in policy["suppressions"]] if policy else []
     # Store only rule/agent combinations in memory, never full logs or descriptions.
     with closing(sqlite3.connect(":memory:")) as db:
@@ -140,6 +142,16 @@ def analyze(path, policy=None, top=10, breakdown=None, collect=None):
                 else:
                     first_ts = stamp if first_ts is None or stamp < first_ts else first_ts
                     last_ts = stamp if last_ts is None or stamp > last_ts else last_ts
+                    if window:
+                        # An incident is a run of alerts from one rule on one agent with gaps shorter than the window.
+                        key = (rule["id"], agent_id)
+                        seconds = stamp.timestamp()
+                        previous = last_seen.get(key)
+                        burst_alerts += 1
+                        if previous is None or abs(seconds - previous) > window:
+                            incidents += 1
+                            rule_incidents[rule["id"]] += 1
+                        last_seen[key] = seconds
                 if agent_id is not None:
                     db.execute("INSERT OR IGNORE INTO agents VALUES (?,?)", (rule["id"], agent_id))
                 protected = bool(policy and (rule["level"] >= policy.get("protected_level", 12) or
@@ -168,6 +180,16 @@ def analyze(path, policy=None, top=10, breakdown=None, collect=None):
                            "last_utc": last_ts.isoformat() if last_ts else None,
                            "alerts_without_valid_timestamp": no_ts},
               "interpretation": "Volume does not establish false positives. Observed dataset only; duplicate input rows count separately."}
+    if window:
+        per_rule = []
+        for rid, count in rules.most_common(top):
+            per_rule.append({"rule_id": rid, "alerts": count, "incidents": rule_incidents.get(rid, 0)})
+        report["bursts"] = {"window_minutes": burst_minutes, "alerts_with_timestamp": burst_alerts,
+                            "incidents": incidents,
+                            "reduction_percent": round(100 * (burst_alerts - incidents) / burst_alerts, 2) if burst_alerts else 0,
+                            "alerts_skipped_without_timestamp": no_ts, "top_rules": per_rule,
+                            "interpretation": "An incident is a run of alerts from one rule on one agent with gaps shorter than the window. "
+                                              "It shows how repetitive the volume is. It does not say any of it is harmless."}
     if policy:
         report["impact"] = {"would_suppress": removed, "remaining": total - removed,
             "suppression_percent": round(100 * removed / total, 2) if total else 0,
@@ -229,6 +251,8 @@ def main(argv=None):
     parser.add_argument("--markdown", help="Markdown summary, for example for $GITHUB_STEP_SUMMARY")
     parser.add_argument("--breakdown", metavar="RULE_ID:FIELD",
                         help="Print the most common values of one field for one rule (terminal only), to help write a narrow exception")
+    parser.add_argument("--burst-window", type=float, metavar="MINUTES",
+                        help="Count how many separate incidents the alerts really are: runs from one rule on one agent with gaps shorter than this")
     parser.add_argument("--path-depth", type=int, metavar="N",
                         help="With --breakdown, fold file paths into their first N folders so noise shows up as a few directories")
     parser.add_argument("--print-schema", action="store_true", help="Print the policy JSON Schema and exit")
@@ -250,9 +274,11 @@ def main(argv=None):
             raise InputError("Outputs must differ from inputs and each other")
         if args.path_depth is not None and (args.path_depth < 1 or not args.breakdown):
             raise InputError("--path-depth needs --breakdown and a number of 1 or more")
+        if args.burst_window is not None and not 0 < args.burst_window <= 1440:
+            raise InputError("--burst-window must be more than 0 and at most 1440 minutes")
         breakdown = parse_breakdown(args.breakdown) if args.breakdown else None
         collect = {}
-        report = analyze(source, load_policy(args.policy) if args.policy else None, args.top, breakdown, collect)
+        report = analyze(source, load_policy(args.policy) if args.policy else None, args.top, breakdown, collect, args.burst_window)
         Path(args.json_path).write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
         if args.html:
             write_text(args.html, views.html_report(report))

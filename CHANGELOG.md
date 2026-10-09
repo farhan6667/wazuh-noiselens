@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- `--burst-window MINUTES` adds a burst view: runs of alerts from one rule on one agent with gaps shorter than the window are counted as one incident, per rule and overall, in JSON, HTML and Markdown. Agents are counted, never named.
 - Reports now state the time range the file covers, read from the alert `timestamp` with any offset and shown in UTC, and how many alerts had no readable timestamp.
 - New rule groups table (JSON, HTML and Markdown) so you can see, for example, file integrity versus authentication share of the volume.
 - `--path-depth N` with `--breakdown` folds file paths into their first N folders and prints a running share, so a long tail of paths shows up as a few directories.
