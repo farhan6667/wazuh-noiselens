@@ -1,4 +1,13 @@
-# Wazuh NoiseLens
+<h1 align="center"><img src="docs/img/banner.svg" alt="Wazuh NoiseLens: see which alerts a proposed Wazuh exception would hide" width="100%"></h1>
+
+<p align="center">
+  <a href="https://github.com/farhan6667/wazuh-noiselens/actions/workflows/ci.yml"><img src="https://github.com/farhan6667/wazuh-noiselens/actions/workflows/ci.yml/badge.svg" alt="tests"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="License: Apache-2.0"></a>
+  <img src="https://img.shields.io/badge/python-3.10%2B-3776ab.svg" alt="Python 3.10+">
+  <img src="https://img.shields.io/badge/runtime%20dependencies-none-2ea44f.svg" alt="No runtime dependencies">
+  <img src="https://img.shields.io/badge/status-prototype-ff8a00.svg" alt="Status: prototype">
+</p>
+
 
 See which alerts a proposed Wazuh exception would hide.
 
@@ -11,6 +20,16 @@ Requires Python 3.10 or newer, with no runtime dependencies. Analysis runs offli
 Version 0.1.0 is a prototype. Local unit and CLI tests pass with synthetic data.
 Testing with representative, sanitized operator data is still pending.
 
+## At a glance
+
+| | |
+|---|---|
+| **Analyzes** | An exported Wazuh alerts.json file, offline, on your workstation |
+| **Measures** | Matches per rule, share of volume, distinct agents, remaining alerts |
+| **Guards** | Exits 1 when a proposed exception would hide a protected alert |
+| **Runs on** | Python 3.10+, no runtime dependencies, no network use |
+| **Status** | Prototype. Testing with real, sanitized operator data is still pending |
+
 ## Before suppressing a noisy rule
 
 A busy rule may contain both routine activity and events worth investigating.
@@ -20,6 +39,10 @@ it matches, including alerts with high severity or rule IDs you've protected.
 Volume alone doesn't tell you whether an alert is a false positive. You still
 need to review the matching events and test an approved exception on a manager.
 NoiseLens measures the proposed impact and leaves that decision with you.
+
+## How it works
+
+<p align="center"><img src="docs/img/how-it-works.svg" width="100%" alt="How Wazuh NoiseLens works, in four steps"></p>
 
 ## Run the demo
 
@@ -113,6 +136,32 @@ Other projects such as [solsoc](https://github.com/luis-troccoli/solsoc) and
 NoiseLens focuses on reproducible impact of proposed suppressions, with no model or API dependency.
 The two approaches can coexist. Read [contribution notes](CONTRIBUTING.md) and [security notes](SECURITY.md) before submitting samples.
 
-Built by [Syed Farhan Ahmed](https://farhan6667.github.io/portfolio/).
 
 For the demo commands and expected results, see [the demo guide](docs/demo.md).
+
+## License
+
+[Apache-2.0](LICENSE). See [NOTICE](NOTICE) for the attribution and trademark note.
+
+---
+
+<div align="center">
+
+<a href="https://nexaforge.eu.cc/">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/img/brand/nexaforge-lockup-dark.webp">
+    <img src="docs/img/brand/nexaforge-lockup-light.webp" height="48" alt="NexaForge">
+  </picture>
+</a>
+&nbsp;&nbsp;
+<a href="https://farhan6667.github.io/portfolio/"><img src="docs/img/brand/sfa-logo.webp" height="64" alt="SFA logo"></a>
+
+**Built by [Syed Farhan Ahmed](https://github.com/farhan6667) (SFA)** at **[NexaForge](https://nexaforge.eu.cc/)**<br>
+Cyber security · Vibe coding · Web development and IT infrastructure
+
+[Website](https://nexaforge.eu.cc/) ·
+[LinkedIn](https://www.linkedin.com/in/sfa6667) ·
+[Portfolio](https://farhan6667.github.io/portfolio/) ·
+[Email](mailto:nexaforge.services@gmail.com)
+
+</div>
