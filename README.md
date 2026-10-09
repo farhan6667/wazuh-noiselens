@@ -8,6 +8,8 @@
   <img src="https://img.shields.io/badge/status-prototype-ff8a00.svg" alt="Status: prototype">
 </p>
 
+🇵🇰 [اردو میں پڑھیں](README.ur.md)
+
 **Wazuh NoiseLens is an open source command line tool for Python 3.10+ that reads an exported Wazuh alerts file, counts alerts by rule and shows which alerts a proposed suppression would hide, including protected ones.** Independent project by Syed Farhan Ahmed (SFA) at NexaForge. It is not affiliated with, sponsored by or endorsed by Wazuh Inc.
 
 
@@ -19,7 +21,7 @@ If the exception matches a protected alert, the command exits with a review fail
 
 Requires Python 3.10 or newer, with no runtime dependencies. Analysis runs offline.
 
-Version 0.2.0 is a prototype. Local unit and CLI tests pass with synthetic data.
+Version 0.3.0 is a prototype. Local unit and CLI tests pass with synthetic data.
 Testing with representative, sanitized operator data is still pending.
 
 ## At a glance
