@@ -8,6 +8,8 @@
   <img src="https://img.shields.io/badge/status-prototype-ff8a00.svg" alt="Status: prototype">
 </p>
 
+**Wazuh NoiseLens is an open source command line tool for Python 3.10+ that reads an exported Wazuh alerts file, counts alerts by rule and shows which alerts a proposed suppression would hide, including protected ones.** Independent project by Syed Farhan Ahmed (SFA) at NexaForge. It is not affiliated with, sponsored by or endorsed by Wazuh Inc.
+
 
 See which alerts a proposed Wazuh exception would hide.
 
@@ -138,6 +140,32 @@ The two approaches can coexist. Read [contribution notes](CONTRIBUTING.md) and [
 
 
 For the demo commands and expected results, see [the demo guide](docs/demo.md).
+
+## Frequently asked questions
+
+### How do I see what a Wazuh suppression would hide?
+Export your alerts as `alerts.json`, write the exception as a small JSON policy and run `noiselens`. It counts how many alerts the exception matches, how many remain, and whether any alert you marked as protected would disappear.
+
+### Can it tell me which alerts are false positives?
+No. Volume alone does not make an alert noise. NoiseLens measures the impact of a proposed exception on your own data, and you still review the matching events before deciding.
+
+### What input does it read?
+JSON Lines: one alert per line, or one indexer document with a `_source` object per line. A whole search-response wrapper is not accepted, so export the `_source` documents one per line first.
+
+### What does exit code 1 mean?
+The proposed policy matches at least one protected alert, so a person needs to review it. Exit 0 means the analysis finished with no protected match in that dataset. That is not proof the exception is safe on traffic you have not seen.
+
+### Does it change my Wazuh configuration?
+No. It only analyses a file. The policy is an analysis contract, not deployable Wazuh XML, so translate an approved exception by hand and test it on a manager.
+
+### Does it send data anywhere?
+No. It runs offline on your workstation, and the reports leave out raw logs, descriptions, process paths and agent identifiers.
+
+### Is it ready for production?
+Not yet. It is a prototype tested with synthetic data. Testing with sanitized real operator data is still pending.
+
+### Is it an official Wazuh tool?
+No. It is an independent project and is not affiliated with Wazuh Inc.
 
 ## License
 
