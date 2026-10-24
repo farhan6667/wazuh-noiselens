@@ -3,6 +3,14 @@
 ## Unreleased
 
 - Removed the Urdu README that shipped in 0.3.0. The project documentation stays in plain English for an international audience.
+- Hardening pass: a deeply nested JSON line in the alerts file or the policy file now fails with
+  a clean `InputError` (exit 2) instead of an uncaught `RecursionError` that printed a raw
+  traceback. Rule IDs, group names and suppression names can no longer break out of the
+  Markdown code span they're rendered in (backtick, carriage return, raw HTML are neutralised),
+  and control or bidirectional-override characters in those same fields are now replaced before
+  they reach the HTML or Markdown report, matching the sanitising already done for the
+  `--breakdown` terminal output. The container-publishing workflow's third-party actions are now
+  pinned by commit SHA, matching the tests workflow.
 
 ## 0.3.0: 2026-10-09
 

@@ -64,6 +64,26 @@ class Tests(unittest.TestCase):
         with self.assertRaises(InputError):
             self.analyze([alert(), {"message": "not an alert"}])
 
+    def test_deeply_nested_json_line_fails_cleanly(self):
+        # A JSON array nested deep enough to blow the interpreter's recursion limit must be
+        # reported as a clean InputError, not an uncaught RecursionError with a raw traceback.
+        depth = 25000
+        bomb = "[" * depth + "]" * depth
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "alerts.jsonl"
+            path.write_text('{"rule":{"id":"1","level":1},"nested":' + bomb + "}\n", encoding="utf-8")
+            with self.assertRaises(InputError):
+                analyze(path)
+
+    def test_deeply_nested_policy_json_fails_cleanly(self):
+        depth = 25000
+        bomb = "[" * depth + "]" * depth
+        with tempfile.TemporaryDirectory() as tmp:
+            path = Path(tmp) / "policy.json"
+            path.write_text(bomb, encoding="utf-8")
+            with self.assertRaises(InputError):
+                load_policy(path)
+
     def test_boolean_level_rejected(self):
         with self.assertRaises(InputError):
             self.analyze([alert(level=True)])

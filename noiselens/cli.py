@@ -28,7 +28,7 @@ def field(event, path):
 def load_policy(path):
     try:
         policy = json.loads(Path(path).read_text(encoding="utf-8"))
-    except (OSError, ValueError):
+    except (OSError, ValueError, RecursionError):
         raise InputError("Cannot read policy JSON") from None
     if not isinstance(policy, dict) or policy.get("schema_version") != 1:
         raise InputError("Policy needs schema_version 1")
@@ -105,7 +105,7 @@ def analyze(path, policy=None, top=10, breakdown=None, collect=None, burst_minut
                     continue
                 try:
                     event = json.loads(line)
-                except ValueError:
+                except (ValueError, RecursionError):
                     raise InputError(f"Invalid JSON on line {number}; no partial report written") from None
                 if isinstance(event, dict) and "_source" in event:
                     event = event["_source"]

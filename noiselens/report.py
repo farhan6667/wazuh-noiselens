@@ -64,13 +64,13 @@ def html_report(report):
             body.append("<div class='verdict fail'>REVIEW REQUIRED: the proposed policy would hide protected alerts. Check the matching events before you change the manager.</div>")
         body.append("<h2>Proposed suppressions</h2><table><tr><th>Name</th><th>Matches</th><th>Protected matches</th><th>Share of all alerts</th></tr>")
         for s in impact["per_suppression"]:
-            body.append(f"<tr><td><code>{E(str(s['name']))}</code></td><td>{s['matches']}</td>"
+            body.append(f"<tr><td><code>{E(printable(s['name']))}</code></td><td>{s['matches']}</td>"
                         f"<td class='{'bad' if s['protected_matches'] else 'ok'}'>{s['protected_matches']}</td>"
                         f"<td>{_bar(s['matches'], s['protected_matches'], total)}</td></tr>")
         body.append("</table>")
     body.append("<h2>Top rules</h2><table><tr><th>Rule</th><th>Alerts</th><th>Share</th><th>Distinct agents</th></tr>")
     for r in report["top_rules"]:
-        body.append(f"<tr><td><code>{E(str(r['rule_id']))}</code></td><td>{r['alerts']}</td>"
+        body.append(f"<tr><td><code>{E(printable(r['rule_id']))}</code></td><td>{r['alerts']}</td>"
                     f"<td>{r['share_percent']}%<br>{_bar(r['alerts'], 0, total)}</td><td>{r['distinct_agents']}</td></tr>")
     body.append("</table>")
     bursts = report.get("bursts")
@@ -80,13 +80,13 @@ def html_report(report):
                     "with gaps shorter than the window. It shows how repetitive the volume is, not that any of it is harmless.</p>"
                     "<table><tr><th>Rule</th><th>Alerts</th><th>Incidents</th></tr>")
         for r in bursts["top_rules"]:
-            body.append(f"<tr><td><code>{E(str(r['rule_id']))}</code></td><td>{r['alerts']}</td><td>{r['incidents']}</td></tr>")
+            body.append(f"<tr><td><code>{E(printable(r['rule_id']))}</code></td><td>{r['alerts']}</td><td>{r['incidents']}</td></tr>")
         body.append("</table>")
     if report.get("top_groups"):
         body.append("<h2>Rule groups</h2><p class='sub'>An alert can belong to several groups, so shares can add up to more than 100%.</p>"
                     "<table><tr><th>Group</th><th>Alerts</th><th>Share</th></tr>")
         for g in report["top_groups"]:
-            body.append(f"<tr><td><code>{E(str(g['group']))}</code></td><td>{g['alerts']}</td><td>{g['share_percent']}%<br>{_bar(g['alerts'], 0, total)}</td></tr>")
+            body.append(f"<tr><td><code>{E(printable(g['group']))}</code></td><td>{g['alerts']}</td><td>{g['share_percent']}%<br>{_bar(g['alerts'], 0, total)}</td></tr>")
         body.append("</table>")
     sev = report["severity_distribution"]
     if sev:
@@ -99,7 +99,16 @@ def html_report(report):
 
 
 def _md(s):
-    return str(s).replace("|", "\\|").replace("\n", " ")
+    """Make an untrusted value safe to drop into a Markdown table cell or $GITHUB_STEP_SUMMARY.
+
+    Values here (rule IDs, group names, suppression names) come from the alerts file or the
+    policy, not from this tool, so they must not be able to break out of the table row, out of
+    the backtick code span they're rendered in, or inject raw HTML into a CI summary or PR
+    comment. A backtick can't be escaped with a backslash inside a code span (CommonMark treats
+    code span content literally), so it is replaced rather than escaped.
+    """
+    s = printable(s).replace("\r\n", "\n").replace("\r", "\n").replace("\n", " ")
+    return s.replace("|", "\\|").replace("`", "'").replace("<", "&lt;").replace(">", "&gt;")
 
 
 def markdown_report(report):

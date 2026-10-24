@@ -40,8 +40,41 @@ class ReportTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             report = analyze(write_alerts(tmp, [event(rid="60107")]), load_policy_from(tmp, policy))
         out = views.html_report(report)
+        md = views.markdown_report(report)
         self.assertNotIn("<img src=x>", out)
-        self.assertIn(r"\|bad", views.markdown_report(report))
+        self.assertIn(r"\|bad", md)
+        self.assertNotIn("<img src=x>", md)
+
+    def test_markdown_neutralises_backtick_cr_and_html_in_rule_and_suppression_names(self):
+        # A rule ID or suppression name is attacker-reachable data (it comes from the alerts
+        # file or the policy, not from this tool). It must not be able to break out of the
+        # backtick code span it is rendered in, inject a line break, or carry raw HTML into a
+        # $GITHUB_STEP_SUMMARY or PR comment.
+        policy = {"schema_version": 1, "suppressions": [{"name": "sup`<b>x</b>\r\ny", "rule_ids": ["bad`id"]}]}
+        with tempfile.TemporaryDirectory() as tmp:
+            report = analyze(write_alerts(tmp, [event(rid="bad`id")]), load_policy_from(tmp, policy))
+        md = views.markdown_report(report)
+        self.assertNotIn("`<", md)
+        self.assertNotIn("<b>", md)
+        self.assertNotIn("\r", md)
+        for line in md.splitlines():
+            self.assertEqual(line.count("`") % 2, 0, f"unbalanced backtick in line: {line!r}")
+
+    def test_reports_neutralise_control_and_bidi_characters_in_rule_ids(self):
+        # A rule ID with a NUL byte or a right-to-left override character (Trojan-Source style)
+        # must not reach either report unneutralised: it can spoof how the ID displays. The RTL
+        # override is built with chr() rather than embedded literally, so this source file does
+        # not itself carry a bidi control character.
+        rtl_override = chr(0x202E)
+        rid = f"rule-\x00-{rtl_override}-evil"
+        with tempfile.TemporaryDirectory() as tmp:
+            report = analyze(write_alerts(tmp, [event(rid=rid)]))
+        out = views.html_report(report)
+        md = views.markdown_report(report)
+        self.assertNotIn("\x00", out)
+        self.assertNotIn(rtl_override, out)
+        self.assertNotIn("\x00", md)
+        self.assertNotIn(rtl_override, md)
 
     def test_markdown_has_one_summary_line(self):
         report = analyze(EXAMPLES / "alerts.jsonl", load_policy(EXAMPLES / "broad-policy.json"))
