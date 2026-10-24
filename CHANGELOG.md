@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.3.1: 2026-10-24
 
 - Removed the Urdu README that shipped in 0.3.0. The project documentation stays in plain English for an international audience.
 - Hardening pass: a deeply nested JSON line in the alerts file or the policy file now fails with
